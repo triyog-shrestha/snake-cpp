@@ -6,20 +6,30 @@ float cellcount = 25;
 
 class Food{
     public:
-    Vector2 position = {5,6};
+    Vector2 position = {12,12};
+    Texture2D texture;
+
+    Food(){
+        Image image = LoadImage("graphics/food.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+    }
+
+    // ~Food(){
+    //     UnloadTexture(texture);
+    // }
 
     void draw(){
-        DrawRectangle(position.x*cellsize, position.y*cellsize, cellsize, cellsize, RED);
+        DrawTexture(texture, position.x*cellsize, position.y*cellsize, WHITE);
     }
 };
 
-Food food;
+
 
 int main(){
     InitWindow(cellsize*cellcount, cellsize*cellcount, "Snake"); 
     SetTargetFPS(60);
-
-
+    Food food;
 
     while (WindowShouldClose() == false) {
         BeginDrawing();
